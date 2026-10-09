@@ -1,0 +1,23 @@
+# Esper Odontología Mendoza — Landing Page
+## Sistema Operativo
+.DS_Store
+Thumbs.db
+
+## Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+## Node (si se instala alguna herramienta de desarrollo)
+node_modules/
+npm-debug.log*
+
+## Variables de entorno
+.env
+.env.local
+
+## Compilados / temporales
+dist/
+build/
+*.tmp
