@@ -11,8 +11,8 @@
   /* Paleta */
   --color-navy:        #003087;  /* Azul marino – principal */
   --color-royal:       #0047AB;  /* Azul royal – secundario */
-  --color-accent:      #00B4D8;  /* Celeste/turquesa – acento */
-  --color-accent-dark: #0096B7;  /* Acento oscurecido para hover */
+  --color-accent:      #1B6CA8;  /* Azul medio – acento sobrio */
+  --color-accent-dark: #155A8A;  /* Acento oscurecido para hover */
   --color-sky-soft:    #CDEBFA;  /* Celeste claro – fondos suaves */
   --color-white:       #FFFFFF;
   --color-gray-50:     #F8FAFC;
@@ -66,7 +66,7 @@
   --shadow-md:  0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
   --shadow-lg:  0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
   --shadow-xl:  0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04);
-  --shadow-accent: 0 8px 32px rgba(0,180,216,.25);
+  --shadow-accent: 0 8px 32px rgba(27,108,168,.3);
 
   /* Transiciones */
   --transition-fast:   150ms ease;
@@ -389,6 +389,16 @@ p { max-width: 70ch; }
   .header-cta { display: inline-flex; }
 }
 
+/* A partir de 768px mostramos los links directamente en el header */
+@media (min-width: 768px) {
+  .hamburger { display: none; }
+  .nav-list {
+    display: flex;
+    gap: var(--space-1);
+  }
+  .main-nav { margin-left: auto; }
+}
+
 @media (min-width: 1024px) {
   .hamburger { display: none; }
   .nav-list { display: flex; }
@@ -466,7 +476,7 @@ p { max-width: 70ch; }
 .hero {
   position: relative;
   min-height: calc(100vh - var(--header-h));
-  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-royal) 60%, #0060C0 100%);
+  background: linear-gradient(150deg, #001a52 0%, var(--color-navy) 40%, var(--color-royal) 80%, #0052CC 100%);
   display: flex;
   align-items: center;
   padding-block: var(--space-16) var(--space-24);
@@ -520,19 +530,29 @@ p { max-width: 70ch; }
   color: rgba(255,255,255,.9);
 }
 
-/* Título hero */
 .hero-title {
-  font-size: clamp(var(--font-size-4xl), 5vw, var(--font-size-6xl));
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
   font-weight: 800;
   color: var(--color-white);
-  line-height: 1.1;
-  margin-bottom: var(--space-5);
-  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: var(--space-6);
+  letter-spacing: -0.04em;
+}
+
+/* Subrayado decorativo debajo del slogan */
+.hero-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+  margin-top: var(--space-4);
 }
 
 .hero-title-accent {
   color: var(--color-accent);
-  display: inline-block;
+  display: block;   /* cada parte en su propia línea = mayor impacto */
 }
 
 .hero-subtitle {
@@ -618,6 +638,11 @@ p { max-width: 70ch; }
   opacity: .12;
   border-radius: var(--radius-2xl);
   z-index: -1;
+}
+
+/* Ocultar el placeholder vacío en mobile (menos de 1024px) */
+@media (max-width: 1023px) {
+  .hero-visual { display: none; }
 }
 
 /* Decoración de muelas – fondo hero */
