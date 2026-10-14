@@ -148,7 +148,7 @@
   );
 
   // Aplicar stagger delay a grupos de cards del mismo contenedor
-  document.querySelectorAll('.services-grid, .steps-grid, .testimonials-grid, .tech-grid').forEach(grid => {
+  document.querySelectorAll('.services-grid, .steps-grid, .tech-grid').forEach(grid => {
     Array.from(grid.children).forEach((child, i) => {
       child.style.transitionDelay = `${i * 80}ms`;
     });
