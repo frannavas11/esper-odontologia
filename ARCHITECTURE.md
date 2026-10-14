@@ -85,13 +85,13 @@ Esper-Salud/
 
 ## 5. Arquitectura de la página
 
-Una sola página con navegación por anclas. Cada sección usa `aria-labelledby` y una clase de fondo (`section--light | dark | soft | white`) para alternar ritmo visual.
+Una sola página con navegación por anclas. Cada sección usa `aria-labelledby` y una clase de fondo (`section--light | dark | white`) para alternar ritmo visual.
 
 | # | `id` | Función | Contenido |
 |---|---|---|---|
 | – | `site-header` | Navegación | Logo, menú, botón "Agendá tu cita", hamburguesa en mobile |
 | 1 | `inicio` | Captación | Título "Tu nueva sonrisa, en un solo día", CTAs, badges (4,6 ★, carga inmediata, planificación digital), tarjeta showcase |
-| 2 | `servicios` | Oferta | 8 cards (prótesis fijas sobre implantes destacada) |
+| 2 | `servicios` | Oferta | 8 cards (3 destacadas de especialidad: prótesis fijas, implantes y rehabilitación oral) |
 | 3 | `tecnologia` | Diferenciación | Planificación digital y precisión clínica, 4 bloques |
 | 4 | `resultados` | Prueba | Slider antes/después de 3 casos con leyenda de consentimiento |
 | 5 | `agendar` | Conversión | 3 pasos + horarios |
