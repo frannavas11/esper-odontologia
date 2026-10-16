@@ -17,6 +17,8 @@
 | Carpeta local | `Esper-Salud/` |
 | Idioma | Español rioplatense (es_AR) |
 
+**Última actualización de este documento:** 15/10/2026.
+
 **Objetivo del sistema:** transmitir seriedad clínica y convertir visitas en consultas por WhatsApp. No hay backend, formularios ni base de datos: el único canal de conversión es un enlace `wa.me`.
 
 ---
@@ -69,11 +71,13 @@ Esper-Salud/
 ├── css/styles.css    Design system (tokens en :root) + estilos de todo el sitio
 ├── js/main.js        Comportamiento: menú, header, slider, animaciones, scroll
 ├── assets/
-│   ├── logo.svg          Logo vectorial (el que se usa en header y footer)
-│   ├── logo.png          Logo raster (~470 KB, candidato a eliminar/comprimir)
-│   ├── esper-1.jpg       Retrato del profesional
-│   ├── caso-1/2/3.jpg    Casos del slider (caso-3 ~400 KB)
-│   └── og-image.jpg      Imagen para redes, 1200×630 (~380 KB)
+│   ├── logo-nuevo.png    Logo actual (PNG 256×256, trazo plateado sobre transparente,
+│   │                     pensado para fondos oscuros). Usado en header, hero y footer
+│   ├── logo.svg          Logo anterior (muela geométrica inventada). Sin uso: eliminar
+│   ├── logo.png          Logo anterior (~470 KB, en realidad un JPEG). Sin uso: eliminar
+│   ├── esper-1.jpg       Retrato del profesional (304×307 px: baja resolución)
+│   ├── caso-1/2/3.jpg    Casos del slider (~500 px; caso-3 es un PNG con extensión .jpg)
+│   └── og-image.jpg      Imagen para redes, 1200×630, con el logo actual
 ├── robots.txt
 ├── sitemap.xml
 ├── .gitignore
@@ -100,6 +104,8 @@ Una sola página con navegación por anclas. Cada sección usa `aria-labelledby`
 | 8 | `contacto` | Contacto | Dirección, horarios, WhatsApp, Instagram, mapa embebido |
 | – | footer | Legal | Navegación, contacto, copyright, aviso de privacidad (Ley 25.326), aviso de carácter informativo |
 | – | flotante | Conversión | Botón de WhatsApp fijo en toda la página |
+
+Fondos: las secciones claras usan `--color-silver` (`.section--white` y `.section--light`) o `--color-silver-light` (`.section--soft`); las oscuras usan `--color-navy`. Hoy `resultados`, `agendar`, `preguntas` y `profesional` quedan consecutivas con el mismo fondo plata (ver pendientes).
 
 Los enlaces del menú y del footer apuntan a estos `id`. Si se agrega, renombra o elimina una sección, actualizar menú, footer y este documento.
 
@@ -129,12 +135,14 @@ Todo vive como variables CSS en `:root`. **Usar siempre los tokens; no hardcodea
 
 | Grupo | Tokens |
 |---|---|
-| Color | `--color-navy #001435` (fondo principal), `--color-royal #001F50`, `--color-accent #48B4DC`, `--color-accent-dark #34A0C8` (hover), `--color-sky-soft #CDEBFA`, escala `--color-gray-50…900`, `--color-text #1E293B`, `--color-text-light #475569`, `--color-star #F59E0B` |
+| Color | `--color-navy #0A1F44` (fondo oscuro principal), `--color-royal #12295A` (degradés), `--color-silver #C8D3E0` (fondo de secciones claras), `--color-silver-light #DCE4EE` (tarjetas y fondos suaves), `--color-silver-border #AEBBCC` (bordes sobre claro), `--color-accent #48B4DC` (solo sobre fondo oscuro), `--color-accent-dark #34A0C8` (hover), `--color-sky-soft #CDEBFA`, escala `--color-gray-50…900`, `--color-text` = `--color-navy`, `--color-text-light #2C3E50`, `--color-star #F59E0B` |
 | Tipografía | `--font-family` Poppins (300–800, `font-display: swap`), `--font-size-xs` 0.75rem a `--font-size-6xl` 3.75rem |
 | Espaciado | `--space-1` 0.25rem a `--space-24` 6rem |
 | Forma | `--radius-sm` a `--radius-full`, `--shadow-sm/md/lg/xl/accent` |
 
-La paleta es la "versión sobria" (azul noche + acero). La paleta original del Instagram del cliente era más brillante (`#003087`, `#0047AB`, `#00B4D8`).
+La paleta es la "versión sobria": azul `#0A1F44` + plata `#C8D3E0` (ajuste del 15/10/2026; antes era azul noche `#001435` con fondos blancos). La paleta original del Instagram del cliente era más brillante (`#003087`, `#0047AB`, `#00B4D8`).
+
+**Contraste (WCAG AA):** sobre plata, el texto principal es `--color-navy` (≈10,7:1) y el secundario `#2C3E50` (≈7,2:1). Para texto o acentos celestes sobre fondo plata se usa `#0E5F85` (≈4,6:1); **no** usar `--color-accent` (`#48B4DC`) ni `#1F7FA8` sobre plata porque no cumplen AA. Hoy `#0E5F85` está escrito a mano en el CSS (ver pendientes).
 
 Principios: mobile-first, contraste AA, áreas táctiles mínimas de 44×44 px, animaciones suaves y respetuosas de `prefers-reduced-motion`.
 
@@ -148,7 +156,9 @@ Principios: mobile-first, contraste AA, áreas táctiles mínimas de 44×44 px, 
 - **`robots.txt` y `sitemap.xml`** apuntan al dominio de Vercel. Actualizar `<lastmod>` al cambiar contenido.
 - **`canonical`/`og:url`** = `https://esper-odontologia.vercel.app/`.
 - **Si se compra dominio propio**, actualizar: canonical, `og:url`, `og:image`, `twitter:image`, `url` del JSON-LD, `robots.txt`, `sitemap.xml`.
-- **Indexación:** configurado con `noindex, nofollow` mientras sea demo para no competir con la web definitiva (quitar al publicar en producción oficial).
+- **Indexación:** habilitada (`<meta name="robots" content="index, follow">`). Se quitó el `noindex, nofollow` que tenía mientras era demo. Para volver a ocultarla, agregar de nuevo `noindex, nofollow` en esa etiqueta.
+- **`theme-color`:** `#0A1F44`.
+- **Vista previa en redes (WhatsApp, etc.):** `og-image.jpg` de 1200×630 con el logo actual. Las plataformas guardan la imagen en caché: para forzar la actualización, agregar un parámetro al enlace (`?v=2`) o usar el depurador de Facebook.
 - Para que Google la encuentre por el nombre del negocio hace falta dominio propio, ficha de Google Business con el enlace a la web, y registro en Search Console.
 
 ---
@@ -197,6 +207,9 @@ Local: abrir `index.html`, o `npx serve .` / `python -m http.server 8000`.
 | Vercel + deploy por push | Gratis para una demo, HTTPS y CDN sin configurar |
 | Tokens CSS | Cambiar la identidad visual tocando un solo bloque |
 | Paleta sobria | Una clínica debe verse seria; el celeste brillante original lo perjudicaba |
+| Plata en lugar de blanco puro | Decisión del 15/10/2026: combina con el contorno plateado del logo y se ve más sobrio; exige cuidar el contraste del texto (ver sección 7) |
+| Logo en PNG (no SVG) | El archivo `logo-nuevo.svg` era en realidad un PNG con extensión `.svg` y los navegadores no lo mostraban. Se usa `logo-nuevo.png` recortado a 256 px. Si se consigue el logo original vectorial, reemplazarlo |
+| Trabajo por ramas | Cada push a `main` es un deploy a producción; los cambios se prueban en una rama y se fusionan a `main` solo con confirmación (ver 14.1) |
 | "Od." en vez de "Dr." | El título no está confirmado por el cliente |
 | Lenguaje cauteloso de salud | Evita promesas de resultado; la publicidad sanitaria tiene reglas (validar con el Colegio Odontológico de Mendoza) |
 
@@ -216,28 +229,33 @@ Local: abrir `index.html`, o `npx serve .` / `python -m http.server 8000`.
 **Técnico:**
 ~~8. El paso 3 de "Cómo agendar" dice "El **Dr.** Esper": unificar a "Od.".~~ *(resuelto)*
 ~~9. Copyright `© 2024` en el HTML (el JS lo corrige en el navegador, pero los buscadores ven 2024): poner 2026.~~ *(resuelto)*
-10. Optimizar `logo.png`, `caso-3.jpg` y `og-image.jpg`; eliminar `logo.png` si no se usa.
+10. Eliminar `logo.png` y `logo.svg` (ya sin uso) y convertir `caso-3.jpg` a un JPEG real. ~~`og-image.jpg` con el logo actual~~ *(resuelto)*.
 11. Verificar el pin del mapa en San Martín 196.
 12. `README.md` desactualizado: reescribirlo.
-13. `robots.txt` y `sitemap.xml` con cambios sin commitear (fin de línea CRLF).
-~~14. Decidir `noindex` mientras sea demo.~~ *(resuelto: agregado `noindex, nofollow` temporal en el HTML)*
+~~13. `robots.txt` y `sitemap.xml` con cambios sin commitear (fin de línea CRLF).~~ *(resuelto)*
+~~14. Decidir `noindex` mientras sea demo.~~ *(resuelto: se quitó el 15/10/2026; el sitio ahora se indexa)*
 15. Mantener al día el 4,6 / 11 reseñas.
+16. **Logo:** `logo-nuevo.png` es una versión rehecha (el archivo trae metadatos de contenido generado con IA), no el original del consultorio. Pedir al cliente el archivo original (PNG con fondo transparente o SVG, y una versión de solo la muela) y reemplazarlo.
+17. **Fotos:** conseguir originales en mayor resolución (retrato del profesional y casos clínicos, hoy ~300–600 px) y fotos del consultorio para el hero.
+18. **Ritmo visual:** cuatro secciones seguidas con el mismo fondo plata y tarjetas casi del mismo tono (contraste 1,18:1 entre `--color-silver-light` y `--color-silver`). Evaluar alternar fondos.
+19. Convertir `#0E5F85` (escrito a mano en varios lugares del CSS) en un token, por ejemplo `--color-accent-on-light`.
+20. Registrar el sitio en Google Search Console y enviar el sitemap. Evaluar dominio propio (`.com.ar`) y actualizar URLs según la sección 8.
 
-**Checklist de entrega al cliente:** resolver 1–5 y 11, quitar `noindex`, dominio propio con actualización de URLs, enlazar la web desde Google Maps e Instagram, registrar el sitio en Search Console y enviar el sitemap.
+**Checklist de entrega al cliente:** resolver 1–5, 11, 16 y 17; dominio propio con actualización de URLs, enlazar la web desde Google Maps e Instagram, registrar el sitio en Search Console y enviar el sitemap. (`noindex` ya fue quitado.)
 
 ---
 
 ## 14. Reglas de trabajo (obligatorias para todo chat o agente)
 
-### 14.1 Commit y push automático en cada cambio
+### 14.1 Flujo de trabajo con ramas
 
-Al terminar **cada** cambio, por chico que sea, sin pedir confirmación:
+Cada push a `main` despliega a producción, así que los cambios se hacen en una rama:
 
-1. `git status` y revisar que no haya archivos ajenos, secretos ni temporales.
-2. `git add` solo de los archivos del cambio (evitar `git add .` a ciegas).
-3. `git commit` con Conventional Commits en español (ver 14.2).
-4. `git pull --rebase origin main` y luego `git push origin main`.
-5. Informar hash, mensaje y si el push salió bien.
+1. `git status`: si hay cambios sin guardar, avisar antes de seguir.
+2. Crear una rama descriptiva (`git checkout -b nombre-del-cambio`) y trabajar solo en ella.
+3. `git add` solo de los archivos del cambio (evitar `git add .` a ciegas) y `git commit` con Conventional Commits en español (ver 14.2).
+4. **No fusionar a `main` ni hacer `git push origin main` sin que el responsable del proyecto lo confirme explícitamente.** Cuando lo confirme: `git checkout main`, `git pull`, `git merge --no-ff <rama>` y `git push origin main`.
+5. Informar hash, mensaje y resultado de cada paso. No borrar ramas sin que se pida.
 
 Seguridad:
 - Nunca `git push --force` ni reescribir historia publicada.
@@ -267,4 +285,4 @@ Ejemplos: `content: unificar "Od." en paso 3 de agendar`, `seo: agregar noindex 
 
 ### 14.5 Historial
 
-`initial landing` → `fotos reales y logo vectorial` → `ajustes de layout` → `tercer caso en el slider` → `hero full-impact, paleta sobria, SEO, robots y sitemap` → `seriedad médica, FAQ, showcase del hero, og:image y correcciones técnicas`. Detalle exacto: `git log --oneline`.
+`initial landing` → `fotos reales y logo vectorial` → `ajustes de layout` → `tercer caso en el slider` → `hero full-impact, paleta sobria, SEO, robots y sitemap` → `seriedad médica, FAQ, showcase del hero, og:image y correcciones técnicas` → `ajuste de paleta (azul #0A1F44, plata) y logo nuevo en PNG` → `og-image con el logo actual e indexación habilitada`. Detalle exacto: `git log --oneline`.
