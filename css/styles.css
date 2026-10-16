@@ -1008,8 +1008,7 @@ p { max-width: 70ch; }
 .gallery-img-wrap img {
   width: 100%;
   height: auto;
-  max-height: 70vh;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: var(--radius-xl);
   display: block;
 }
