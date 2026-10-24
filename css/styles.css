@@ -77,11 +77,12 @@
   --transition-slow:   350ms ease;
 
   /* Z-index escala */
-  --z-base:    10;
-  --z-nav:     20;
-  --z-modal:   30;
-  --z-toast:   40;
-  --z-float:   50;
+  --z-base:     10;
+  --z-float:    40;
+  --z-backdrop: 90;
+  --z-nav:      100;
+  --z-modal:    200;
+  --z-toast:    300;
 
   /* Header height */
   --header-h: 72px;
@@ -284,7 +285,7 @@ p { max-width: 70ch; }
 .logo-text {
   display: flex;
   flex-direction: column;
-  line-height: 1;
+  gap: 4px;
 }
 
 .logo-name {
@@ -292,23 +293,25 @@ p { max-width: 70ch; }
   font-weight: 700;
   color: var(--color-white);
   letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .logo-sub {
-  font-size: var(--font-size-xs);
-  font-weight: 400;
+  font-size: 0.72rem;
+  font-weight: 500;
   color: var(--color-accent);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  line-height: 1;
 }
 
-/* Navegación */
+/* Navegación Base */
 .main-nav {
   margin-left: auto;
 }
 
 .nav-list {
-  display: none;         /* Oculto en mobile, visible desde 1024px */
+  display: flex;
   align-items: center;
   gap: var(--space-1);
 }
@@ -320,9 +323,10 @@ p { max-width: 70ch; }
   color: rgba(255,255,255,.8);
   border-radius: var(--radius-sm);
   transition: color var(--transition-fast), background-color var(--transition-fast);
+  text-decoration: none;
 }
 
-.nav-link:hover, .nav-link:focus-visible {
+.nav-link:hover, .nav-link:focus-visible, .nav-link.nav-link--active {
   color: var(--color-white);
   background-color: rgba(255,255,255,.08);
 }
@@ -346,6 +350,7 @@ p { max-width: 70ch; }
   padding: var(--space-2);
   margin-left: auto;
   flex-shrink: 0;
+  z-index: calc(var(--z-nav) + 1);
 }
 
 .hamburger-line {
@@ -363,30 +368,128 @@ p { max-width: 70ch; }
 .hamburger.is-open .hamburger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger.is-open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Menú mobile abierto */
-.main-nav.is-open {
-  position: absolute;
+/* Backdrop para menú mobile */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
   top: var(--header-h);
-  left: 0;
-  right: 0;
-  background-color: var(--color-navy);
-  border-top: 1px solid rgba(255,255,255,.08);
-  padding: var(--space-4);
-  box-shadow: var(--shadow-xl);
+  background-color: rgba(6, 16, 31, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+  z-index: var(--z-backdrop);
 }
 
-.main-nav.is-open .nav-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-1);
+.nav-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
-.main-nav.is-open .nav-link {
-  display: block;
-  width: 100%;
-  padding: var(--space-3) var(--space-4);
-  font-size: var(--font-size-base);
+/* Bloqueo de scroll de la página de fondo cuando el menú está abierto */
+body.nav-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* Menú mobile (< 768px) */
+@media (max-width: 767px) {
+  .main-nav {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(14, 27, 46, 0.98) 0%, rgba(10, 20, 36, 0.99) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(43, 219, 219, 0.2);
+    padding: var(--space-4) var(--space-5) var(--space-6);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+    z-index: var(--z-nav);
+    max-height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+  }
+
+  .main-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .main-nav .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Direcciones/enlaces alineados hacia la derecha (hacia el botón hamburguesa y zona ergonómica del pulgar) */
+  .main-nav .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    width: 100%;
+    min-height: 48px;
+    padding: var(--space-3) var(--space-4);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.88);
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast), background-color var(--transition-fast), padding-right var(--transition-fast);
+  }
+
+  .main-nav .nav-link::after {
+    content: "›";
+    font-size: 1.25rem;
+    line-height: 1;
+    margin-left: var(--space-3);
+    color: var(--color-accent);
+    opacity: 0.6;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  .main-nav .nav-link:hover,
+  .main-nav .nav-link:focus-visible,
+  .main-nav .nav-link.nav-link--active {
+    color: var(--color-white);
+    background-color: rgba(43, 219, 219, 0.08);
+    padding-right: var(--space-5);
+  }
+
+  .main-nav .nav-link:hover::after,
+  .main-nav .nav-link:focus-visible::after,
+  .main-nav .nav-link.nav-link--active::after {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
+  .main-nav .nav-mobile-cta {
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+  }
+
+  .main-nav .nav-mobile-cta .btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
 }
 
 /* Breakpoints header */
@@ -394,20 +497,51 @@ p { max-width: 70ch; }
   .header-cta { display: inline-flex; }
 }
 
-/* A partir de 768px mostramos los links directamente en el header */
+/* Modo Desktop (≥ 768px) */
 @media (min-width: 768px) {
   .hamburger { display: none; }
-  .nav-list {
+  .nav-backdrop { display: none !important; }
+
+  .main-nav {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    max-height: none;
+    overflow-y: visible;
+    margin-left: auto;
+  }
+
+  .main-nav .nav-list {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     gap: var(--space-1);
   }
-  .main-nav { margin-left: auto; }
-}
 
-@media (min-width: 1024px) {
-  .hamburger { display: none; }
-  .nav-list { display: flex; }
-  .main-nav { margin-left: auto; }
+  .main-nav .nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-height: auto;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .main-nav .nav-link::after {
+    display: none;
+  }
+
+  .nav-mobile-cta {
+    display: none;
+  }
 }
 
 /* ============================================================
@@ -1363,7 +1497,7 @@ p { max-width: 70ch; }
   border: 1px solid var(--color-silver-border);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .faq-item:hover {
@@ -1374,6 +1508,7 @@ p { max-width: 70ch; }
 .faq-item[open] {
   box-shadow: var(--shadow-md);
   border-color: #0E5F85;
+  background: #ffffff;
 }
 
 .faq-summary {
@@ -1387,7 +1522,13 @@ p { max-width: 70ch; }
   font-weight: 600;
   color: var(--color-navy);
   user-select: none;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  outline: none;
+}
+
+.faq-summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
 }
 
 .faq-summary::-webkit-details-marker {
@@ -1420,6 +1561,18 @@ p { max-width: 70ch; }
   line-height: 1.7;
   border-top: 1px solid var(--color-silver-border);
   padding-top: var(--space-4);
+  animation: faqFadeIn 220ms ease;
+}
+
+@keyframes faqFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============================================================

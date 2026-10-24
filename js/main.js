@@ -8,38 +8,76 @@
 'use strict';
 
 /* ============================================================
-   1. MENÚ HAMBURGUESA (MOBILE)
+   1. MENÚ HAMBURGUESA Y OVERLAY (MOBILE)
    ============================================================ */
 (function initHamburger() {
   const btn = document.getElementById('hamburger-btn');
   const nav = document.getElementById('main-nav');
+  const backdrop = document.getElementById('nav-backdrop');
   if (!btn || !nav) return;
 
-  btn.addEventListener('click', () => {
+  function openMenu() {
+    btn.setAttribute('aria-expanded', 'true');
+    btn.classList.add('is-open');
+    nav.classList.add('is-open');
+    if (backdrop) backdrop.classList.add('is-open');
+    document.body.classList.add('nav-open');
+  }
+
+  function closeMenu() {
+    btn.setAttribute('aria-expanded', 'false');
+    btn.classList.remove('is-open');
+    nav.classList.remove('is-open');
+    if (backdrop) backdrop.classList.remove('is-open');
+    document.body.classList.remove('nav-open');
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isOpen = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!isOpen));
-    btn.classList.toggle('is-open', !isOpen);
-    nav.classList.toggle('is-open', !isOpen);
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
-  // Cerrar al clickear un enlace del menú
-  nav.querySelectorAll('.nav-link').forEach(link => {
+  // Cerrar al tocar el backdrop / overlay exterior
+  if (backdrop) {
+    backdrop.addEventListener('click', closeMenu);
+    backdrop.addEventListener('touchstart', closeMenu, { passive: true });
+  }
+
+  // Cerrar al clickear cualquier enlace o botón del menú
+  nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      btn.setAttribute('aria-expanded', 'false');
-      btn.classList.remove('is-open');
-      nav.classList.remove('is-open');
+      closeMenu();
     });
   });
 
-  // Cerrar con Escape
+  // Cerrar al hacer clic en cualquier parte fuera del menú y del botón
+  document.addEventListener('click', (e) => {
+    if (nav.classList.contains('is-open')) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        closeMenu();
+      }
+    }
+  });
+
+  // Cerrar con tecla Escape
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-      btn.setAttribute('aria-expanded', 'false');
-      btn.classList.remove('is-open');
-      nav.classList.remove('is-open');
+      closeMenu();
       btn.focus();
     }
   });
+
+  // Cerrar automáticamente si la pantalla pasa a desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768 && nav.classList.contains('is-open')) {
+      closeMenu();
+    }
+  }, { passive: true });
 })();
 
 /* ============================================================
@@ -197,15 +235,41 @@
 (function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        const headerH = parseInt(
-          getComputedStyle(document.documentElement).getPropertyValue('--header-h'),
-          10
-        ) || 72;
-        const top = target.getBoundingClientRect().top + window.scrollY - headerH;
-        window.scrollTo({ top, behavior: 'smooth' });
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#') return;
+      try {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const headerH = parseInt(
+            getComputedStyle(document.documentElement).getPropertyValue('--header-h'),
+            10
+          ) || 72;
+          const top = target.getBoundingClientRect().top + window.scrollY - headerH;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      } catch (_) {
+        // Ignorar selectores no válidos
+      }
+    });
+  });
+})();
+
+/* ============================================================
+   8. PREGUNTAS FRECUENTES — COMPORTAMIENTO ACORDEÓN (UNA SOLA ABIERTA)
+   ============================================================ */
+(function initFaqAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  if (!faqItems.length) return;
+
+  faqItems.forEach(item => {
+    item.addEventListener('toggle', () => {
+      if (item.open) {
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item && otherItem.open) {
+            otherItem.open = false;
+          }
+        });
       }
     });
   });
