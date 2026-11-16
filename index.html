@@ -73,10 +73,16 @@
   }
   </script>
 
-  <!-- Google Fonts – Poppins con font-display: swap -->
+  <!-- Google Fonts Premium – Plus Jakarta Sans (body) + Outfit (headings) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- AOS – Animate On Scroll -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <!-- Img Comparison Slider -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -112,9 +118,7 @@
            class="btn btn-accent"
            target="_blank" rel="noopener noreferrer"
            aria-label="Agendar cita por WhatsApp">
-          <svg class="btn-icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-          </svg>
+          <i data-lucide="message-circle" aria-hidden="true" width="18" height="18"></i>
           Agendá tu cita
         </a>
       </div>
@@ -125,9 +129,7 @@
        class="btn btn-accent header-cta"
        target="_blank" rel="noopener noreferrer"
        aria-label="Agendar cita por WhatsApp">
-      <svg class="btn-icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-      </svg>
+      <i data-lucide="message-circle" aria-hidden="true" width="18" height="18"></i>
       Agendá tu cita
     </a>
 
@@ -168,6 +170,12 @@
   <div class="container hero-content">
     <div class="hero-text animate-fade-up">
 
+      <!-- Badge animado -->
+      <div class="hero-live-badge" aria-label="Odontología Digital en el Valle de Uco">
+        <span class="hero-live-dot" aria-hidden="true"></span>
+        <i data-lucide="map-pin" aria-hidden="true" width="12" height="12"></i>
+        Odontología Digital en el Valle de Uco
+      </div>
 
       <h1 id="hero-title" class="hero-title">
         Tu nueva sonrisa,
@@ -190,9 +198,7 @@
         </a>
         <a href="#servicios" class="btn btn-outline btn-lg">
           Ver servicios
-          <svg class="btn-icon-right" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
+          <i data-lucide="chevron-down" aria-hidden="true" width="18" height="18"></i>
         </a>
       </div>
 
@@ -216,7 +222,7 @@
 
     </div><!-- /.hero-text -->
 
-    <!-- Visual lado derecho: Tarjeta de presentación clínica -->
+    <!-- Visual lado derecho: Tarjeta Glassmorphism de Credenciales -->
     <div class="hero-visual animate-fade-left">
       <div class="hero-showcase-card">
         <div class="showcase-header">
@@ -226,33 +232,62 @@
           <div>
             <span class="showcase-badge">Clínica Odontológica</span>
             <h2 class="showcase-clinic-name">Esper Odontología</h2>
-            <p class="showcase-location">Vista Flores, Valle de Uco</p>
+            <p class="showcase-location">
+              <i data-lucide="map-pin" aria-hidden="true" width="12" height="12"></i>
+              Vista Flores, Valle de Uco
+            </p>
           </div>
         </div>
 
         <div class="showcase-divider" aria-hidden="true"></div>
 
-        <ul class="showcase-features" role="list">
-          <li>
-            <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            <span>Evaluación diagnóstica personalizada</span>
-          </li>
-          <li>
-            <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            <span>Prótesis fijas sobre implantes</span>
-          </li>
-          <li>
-            <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            <span>Planificación digital y estética integral</span>
-          </li>
-        </ul>
+        <!-- Micro-tarjetas de credenciales -->
+        <div class="showcase-micro-cards">
+
+          <div class="showcase-micro-card">
+            <div class="showcase-micro-icon">
+              <i data-lucide="shield-check" aria-hidden="true" width="18" height="18"></i>
+            </div>
+            <div>
+              <span class="showcase-micro-title">Diagnóstico riguroso</span>
+              <span class="showcase-micro-sub">Evaluación tomográfica previa</span>
+            </div>
+          </div>
+
+          <div class="showcase-micro-card">
+            <div class="showcase-micro-icon">
+              <i data-lucide="cpu" aria-hidden="true" width="18" height="18"></i>
+            </div>
+            <div>
+              <span class="showcase-micro-title">Flujo 100% digital</span>
+              <span class="showcase-micro-sub">Planificación por software</span>
+            </div>
+          </div>
+
+          <div class="showcase-micro-card">
+            <div class="showcase-micro-icon">
+              <i data-lucide="calendar-check" aria-hidden="true" width="18" height="18"></i>
+            </div>
+            <div>
+              <span class="showcase-micro-title">Turnos programados</span>
+              <span class="showcase-micro-sub">Atención dedicada y personalizada</span>
+            </div>
+          </div>
+
+        </div>
 
         <div class="showcase-footer">
           <div class="showcase-rating">
             <span class="showcase-stars" aria-hidden="true">★★★★★</span>
             <span class="showcase-rating-text"><strong>4,6</strong> en Google Maps</span>
           </div>
-          <span class="showcase-tag">Turnos programados</span>
+          <a href="https://wa.me/5492622503823?text=Hola%2C%20quiero%20agendar%20una%20consulta"
+             class="showcase-cta-btn"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Consultar turno">
+            <i data-lucide="arrow-right" aria-hidden="true" width="14" height="14"></i>
+            Consultar turno
+          </a>
         </div>
       </div>
     </div>
@@ -270,7 +305,7 @@
 ==================================================== -->
 <section class="section section--light" id="servicios" aria-labelledby="servicios-title">
   <div class="container">
-    <div class="section-header animate-fade-up">
+    <div class="section-header" data-aos="fade-up">
       <p class="section-eyebrow">Nuestros servicios</p>
       <h2 id="servicios-title" class="section-title">Todo lo que necesitás para tu sonrisa</h2>
       <p class="section-desc">Atención odontológica integral con tecnología digital y enfoque personalizado. Todo tratamiento comienza con una consulta de evaluación y diagnóstico clínico integral.</p>
@@ -278,89 +313,102 @@
 
     <div class="services-grid" role="list">
 
-      <!-- Card destacada (Movida al principio) -->
-      <article class="service-card service-card--featured animate-fade-up" role="listitem">
-        <div class="service-card-badge">Especialidad</div>
+      <!-- Card destacada 1 -->
+      <article class="service-card service-card--featured" role="listitem" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-card-badge">
+          <i data-lucide="sparkles" aria-hidden="true" width="10" height="10"></i>
+          Especialidad
+        </div>
+        <div class="service-card-arrow" aria-hidden="true">
+          <i data-lucide="arrow-up-right" width="16" height="16"></i>
+        </div>
         <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
+          <i data-lucide="heart-pulse" width="32" height="32"></i>
         </div>
         <h3 class="service-title">Prótesis fijas sobre implantes</h3>
         <p class="service-desc">Carga inmediata de arcos completos: colocación de prótesis en tiempos optimizados, sujeta a evaluación diagnóstica y factibilidad ósea de cada caso.</p>
       </article>
 
-      <article class="service-card service-card--featured animate-fade-up" role="listitem">
-        <div class="service-card-badge">Especialidad</div>
+      <article class="service-card service-card--featured" role="listitem" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-card-badge">
+          <i data-lucide="sparkles" aria-hidden="true" width="10" height="10"></i>
+          Especialidad
+        </div>
+        <div class="service-card-arrow" aria-hidden="true">
+          <i data-lucide="arrow-up-right" width="16" height="16"></i>
+        </div>
         <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M12 3v2m0 14v2M6.343 6.343l1.414 1.414m8.486 8.486 1.414 1.414M3 12h2m14 0h2M6.343 17.657l1.414-1.414m8.486-8.486 1.414-1.414"/>
-          </svg>
+          <i data-lucide="shield-check" width="32" height="32"></i>
         </div>
         <h3 class="service-title">Implantes dentales</h3>
         <p class="service-desc">Reemplazo de piezas dentarias ausentes con fijaciones de titanio biocompatibles, devolviendo firmeza, estética y salud oclusal.</p>
       </article>
 
-      <article class="service-card animate-fade-up" role="listitem">
+      <article class="service-card" role="listitem" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-card-arrow" aria-hidden="true">
+          <i data-lucide="arrow-up-right" width="16" height="16"></i>
+        </div>
         <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><path stroke-linecap="round" d="M8 21h8M12 17v4"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 8h1l2 3 2-5 2 3 1-1h4"/>
-          </svg>
+          <i data-lucide="cpu" width="32" height="32"></i>
         </div>
         <h3 class="service-title">Odontología digital</h3>
         <p class="service-desc">Integración de herramientas digitales en diagnóstico y diseño para tratamientos más exactos, previsibles y confortables.</p>
       </article>
 
-      <article class="service-card animate-fade-up" role="listitem">
+      <article class="service-card" role="listitem" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-card-arrow" aria-hidden="true">
+          <i data-lucide="arrow-up-right" width="16" height="16"></i>
+        </div>
         <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3"/>
-          </svg>
+          <i data-lucide="scan-face" width="32" height="32"></i>
         </div>
         <h3 class="service-title">Planificación digital</h3>
         <p class="service-desc">Estudio minucioso previo en software especializado para proyectar los pasos clínicos y el resultado antes de comenzar.</p>
       </article>
 
-      <article class="service-card animate-fade-up" role="listitem">
+      <article class="service-card" role="listitem" data-aos="fade-up" data-aos-delay="300">
+        <div class="service-card-arrow" aria-hidden="true">
+          <i data-lucide="arrow-up-right" width="16" height="16"></i>
+        </div>
         <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <circle cx="12" cy="12" r="10"/>
-            <path stroke-linecap="round" d="M8 14s1.5 2 4 2 4-2 4-2"/>
-            <path stroke-linecap="round" d="M9 9h.01M15 9h.01"/>
-          </svg>
+          <i data-lucide="smile" width="32" height="32"></i>
         </div>
         <h3 class="service-title">Diseño de sonrisa</h3>
         <p class="service-desc">Planificación estética en armonía con las proporciones faciales y la biomecánica mandibular del paciente.</p>
       </article>
 
-      <article class="service-card service-card--featured animate-fade-up" role="listitem">
-        <div class="service-card-badge">Especialidad</div>
+      <article class="service-card service-card--featured" role="listitem" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-card-badge">
+          <i data-lucide="sparkles" aria-hidden="true" width="10" height="10"></i>
+          Especialidad
+        </div>
+        <div class="service-card-arrow" aria-hidden="true">
+          <i data-lucide="arrow-up-right" width="16" height="16"></i>
+        </div>
         <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
+          <i data-lucide="award" width="32" height="32"></i>
         </div>
         <h3 class="service-title">Rehabilitación oral</h3>
         <p class="service-desc">Recuperación funcional y estética integral mediante un plan secuencial adaptado a la salud bucal de cada persona.</p>
       </article>
 
-
-      <article class="service-card animate-fade-up" role="listitem">
+      <article class="service-card" role="listitem" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-card-arrow" aria-hidden="true">
+          <i data-lucide="arrow-up-right" width="16" height="16"></i>
+        </div>
         <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0121.485 12 59.768 59.768 0 013.27 20.875L5.999 12zm0 0h7.5"/>
-          </svg>
+          <i data-lucide="gem" width="32" height="32"></i>
         </div>
         <h3 class="service-title">Coronas cerámicas de alta estética</h3>
         <p class="service-desc">Restauraciones de cerámica libre de metal para una estética natural, translucidez y ajuste anatómico preciso.</p>
       </article>
 
-      <article class="service-card animate-fade-up" role="listitem">
+      <article class="service-card" role="listitem" data-aos="fade-up" data-aos-delay="300">
+        <div class="service-card-arrow" aria-hidden="true">
+          <i data-lucide="arrow-up-right" width="16" height="16"></i>
+        </div>
         <div class="service-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25A2.25 2.25 0 0113.5 8.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>
-          </svg>
+          <i data-lucide="align-center" width="32" height="32"></i>
         </div>
         <h3 class="service-title">Ortodoncia</h3>
         <p class="service-desc">Alineación dental preventiva y correctiva con aparatología fija tradicional o alineadores según indicación clínica.</p>
@@ -382,7 +430,7 @@
   </div>
 
   <div class="container">
-    <div class="section-header animate-fade-up">
+    <div class="section-header" data-aos="fade-up">
       <p class="section-eyebrow section-eyebrow--light">Tecnología de vanguardia</p>
       <h2 id="tecnologia-title" class="section-title section-title--light">Planificación digital y precisión clínica</h2>
       <p class="section-desc section-desc--light">La odontología digital permite diagnosticar y planificar cada tratamiento con exactitud milimétrica, optimizando el confort del paciente y la previsibilidad del resultado.</p>
@@ -390,45 +438,64 @@
 
     <div class="tech-grid">
 
-      <div class="tech-feature animate-fade-left">
+      <div class="tech-feature" data-aos="fade-left" data-aos-delay="100">
+        <div class="tech-img-placeholder" aria-hidden="true">
+          <i data-lucide="scan-face" width="40" height="40"></i>
+        </div>
         <div class="tech-icon-wrap" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 13.5h4.5v4.5h-4.5v-4.5z"/>
-          </svg>
+          <i data-lucide="scan-face" width="36" height="36"></i>
         </div>
         <h3 class="tech-feature-title">Escaneo y registro digital 3D</h3>
         <p class="tech-feature-desc">Reemplazo de impresiones tradicionales molestas por capturas digitales precisas para una evaluación anatómica clara y cómoda.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Sin pastas molestas</span>
+          <span class="tech-tag">Precisión sub-milimétrica</span>
+        </div>
       </div>
 
-      <div class="tech-feature animate-fade-up">
+      <div class="tech-feature" data-aos="fade-up" data-aos-delay="200">
+        <div class="tech-img-placeholder" aria-hidden="true">
+          <i data-lucide="monitor" width="40" height="40"></i>
+        </div>
         <div class="tech-icon-wrap" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3"/>
-          </svg>
+          <i data-lucide="monitor" width="36" height="36"></i>
         </div>
         <h3 class="tech-feature-title">Diseño digital personalizado</h3>
         <p class="tech-feature-desc">Simulación previa del tratamiento para evaluar proporciones estéticas, funcionalidad masticatoria y expectativas antes de intervenir.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Resultado previsible</span>
+          <span class="tech-tag">Flujo 100% 3D</span>
+        </div>
       </div>
 
-      <div class="tech-feature animate-fade-right">
+      <div class="tech-feature" data-aos="fade-right" data-aos-delay="100">
+        <div class="tech-img-placeholder" aria-hidden="true">
+          <i data-lucide="microscope" width="40" height="40"></i>
+        </div>
         <div class="tech-icon-wrap" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
+          <i data-lucide="microscope" width="36" height="36"></i>
         </div>
         <h3 class="tech-feature-title">Restauraciones de alta precisión</h3>
         <p class="tech-feature-desc">Piezas protésicas confeccionadas con estándares digitales que aseguran ajuste marginal, durabilidad y biocompatibilidad.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Precisión micrométrica</span>
+          <span class="tech-tag">Biocompatible</span>
+        </div>
       </div>
 
-      <div class="tech-feature animate-fade-left">
+      <div class="tech-feature" data-aos="fade-left" data-aos-delay="200">
+        <div class="tech-img-placeholder" aria-hidden="true">
+          <i data-lucide="crosshair" width="40" height="40"></i>
+        </div>
         <div class="tech-icon-wrap" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
+          <i data-lucide="crosshair" width="36" height="36"></i>
         </div>
         <h3 class="tech-feature-title">Planificación quirúrgica guiada</h3>
         <p class="tech-feature-desc">Estudio previo de la anatomía ósea para colocar los implantes dentales en la posición biomecánicamente óptima.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Guía quirúrgica</span>
+          <span class="tech-tag">Máxima seguridad</span>
+        </div>
       </div>
 
     </div><!-- /.tech-grid -->
@@ -440,56 +507,69 @@
 ==================================================== -->
 <section class="section section--white" id="resultados" aria-labelledby="resultados-title">
   <div class="container">
-    <div class="section-header animate-fade-up">
+    <div class="section-header" data-aos="fade-up">
       <p class="section-eyebrow">Casos clínicos</p>
       <h2 id="resultados-title" class="section-title">Antes y después</h2>
       <p class="section-desc">Casos clínicos documentados. Los resultados varían según el diagnóstico, condiciones biológicas y anatomía de cada paciente. Fotografías con fines exclusivamente informativos y consentimiento previo.</p>
     </div>
 
-    <div class="gallery-slider" role="region" aria-label="Galería antes y después">
-      <div class="gallery-track" id="gallery-track">
+    <!-- Comparison Slider interactivo -->
+    <div class="results-slider-wrap" data-aos="fade-up" data-aos-delay="100">
+      <div class="results-comparison-grid">
 
-        <!-- Slide 1 -->
-        <div class="gallery-slide" role="tabpanel" aria-label="Caso 1">
-          <div class="gallery-img-wrap">
-            <img src="assets/caso-1.jpg" alt="Antes y después de rehabilitación completa" />
-          </div>
+        <!-- Caso 1: Comparison Slider -->
+        <div class="result-case" data-aos="fade-up" data-aos-delay="100">
+          <img-comparison-slider class="comparison-slider">
+            <figure slot="first" class="comparison-figure comparison-figure--before">
+              <img src="assets/caso-1.jpg" alt="Antes: Rehabilitación de arco completo" />
+              <figcaption class="comparison-label">Antes</figcaption>
+            </figure>
+            <figure slot="second" class="comparison-figure comparison-figure--after">
+              <img src="assets/caso-1.jpg" alt="Después: Rehabilitación de arco completo" />
+              <figcaption class="comparison-label comparison-label--after">Después</figcaption>
+            </figure>
+          </img-comparison-slider>
           <p class="gallery-caption">Rehabilitación de arco completo sobre implantes en carga inmediata.</p>
         </div>
 
-        <!-- Slide 2 -->
-        <div class="gallery-slide" role="tabpanel" aria-label="Caso 2" hidden>
-          <div class="gallery-img-wrap">
-            <img src="assets/caso-2.jpg" alt="Antes y después de corona cerámica" />
-          </div>
-          <p class="gallery-caption">Restauración estética de pieza dental anterior con corona de cerámica libre de metal.</p>
+        <!-- Caso 2 -->
+        <div class="result-case" data-aos="fade-up" data-aos-delay="200">
+          <img-comparison-slider class="comparison-slider">
+            <figure slot="first" class="comparison-figure comparison-figure--before">
+              <img src="assets/caso-2.jpg" alt="Antes: Corona cerámica" />
+              <figcaption class="comparison-label">Antes</figcaption>
+            </figure>
+            <figure slot="second" class="comparison-figure comparison-figure--after">
+              <img src="assets/caso-2.jpg" alt="Después: Corona cerámica" />
+              <figcaption class="comparison-label comparison-label--after">Después</figcaption>
+            </figure>
+          </img-comparison-slider>
+          <p class="gallery-caption">Restauración estética con corona de cerámica libre de metal.</p>
         </div>
 
-        <!-- Slide 3 -->
-        <div class="gallery-slide" role="tabpanel" aria-label="Caso 3" hidden>
-          <div class="gallery-img-wrap">
-            <img src="assets/caso-3.jpg" alt="Antes y después de tratamiento" />
-          </div>
+        <!-- Caso 3 -->
+        <div class="result-case" data-aos="fade-up" data-aos-delay="300">
+          <img-comparison-slider class="comparison-slider">
+            <figure slot="first" class="comparison-figure comparison-figure--before">
+              <img src="assets/caso-3.jpg" alt="Antes: Rehabilitación estética" />
+              <figcaption class="comparison-label">Antes</figcaption>
+            </figure>
+            <figure slot="second" class="comparison-figure comparison-figure--after">
+              <img src="assets/caso-3.jpg" alt="Después: Rehabilitación estética" />
+              <figcaption class="comparison-label comparison-label--after">Después</figcaption>
+            </figure>
+          </img-comparison-slider>
           <p class="gallery-caption">Rehabilitación estética integral.</p>
         </div>
 
-      </div><!-- /.gallery-track -->
-
-      <div class="gallery-controls">
-        <button class="gallery-btn" id="gallery-prev" aria-label="Caso anterior">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-        </button>
-        <div class="gallery-dots" id="gallery-dots" role="tablist" aria-label="Navegación de casos">
-          <button class="gallery-dot gallery-dot--active" role="tab" aria-selected="true" aria-label="Caso 1" data-index="0"></button>
-          <button class="gallery-dot" role="tab" aria-selected="false" aria-label="Caso 2" data-index="1"></button>
-          <button class="gallery-dot" role="tab" aria-selected="false" aria-label="Caso 3" data-index="2"></button>
-        </div>
-        <button class="gallery-btn" id="gallery-next" aria-label="Caso siguiente">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-        </button>
       </div>
 
-    </div><!-- /.gallery-slider -->
+      <p class="results-disclaimer">
+        <i data-lucide="info" aria-hidden="true" width="14" height="14"></i>
+        Arrastrá el control deslizante para comparar antes y después. Los resultados varían según cada caso.
+      </p>
+    </div>
+
   </div>
 </section>
 
@@ -498,7 +578,7 @@
 ==================================================== -->
 <section class="section section--white" id="agendar" aria-labelledby="agendar-title">
   <div class="container">
-    <div class="section-header animate-fade-up">
+    <div class="section-header" data-aos="fade-up">
       <p class="section-eyebrow">Simple y sin vueltas</p>
       <h2 id="agendar-title" class="section-title">Cómo agendar tu cita</h2>
       <p class="section-desc">En tres pasos simples coordinamos todo para que tu visita sea cómoda y sin complicaciones.</p>
@@ -506,12 +586,10 @@
 
     <div class="steps-grid">
 
-      <div class="step animate-fade-up">
-        <div class="step-number" aria-hidden="true">01</div>
+      <div class="step" data-aos="fade-up" data-aos-delay="100">
+        <span class="step-bg-number" aria-hidden="true">01</span>
         <div class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
-          </svg>
+          <i data-lucide="message-circle" width="28" height="28"></i>
         </div>
         <h3 class="step-title">Escribinos por WhatsApp</h3>
         <p class="step-desc">Mandanos un mensaje con tu consulta. Respondemos en horario de atención.</p>
@@ -519,38 +597,33 @@
            class="step-link" target="_blank" rel="noopener noreferrer"
            aria-label="Escribir por WhatsApp a Esper Odontología">
           Escribir ahora
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          <i data-lucide="arrow-right" aria-hidden="true" width="14" height="14"></i>
         </a>
       </div>
 
-      <div class="step animate-fade-up">
-        <div class="step-number" aria-hidden="true">02</div>
+      <div class="step" data-aos="fade-up" data-aos-delay="200">
+        <span class="step-bg-number" aria-hidden="true">02</span>
         <div class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/>
-          </svg>
+          <i data-lucide="calendar-check" width="28" height="28"></i>
         </div>
         <h3 class="step-title">Coordinamos día y horario</h3>
         <p class="step-desc">Elegimos juntos el día y horario que mejor te quede dentro de nuestro horario de atención.</p>
         <div class="step-horarios">
           <p class="step-horario-item">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <i data-lucide="sun" aria-hidden="true" width="14" height="14"></i>
             Mañana: 8:30 &ndash; 12:30 hs
           </p>
           <p class="step-horario-item">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <i data-lucide="sunset" aria-hidden="true" width="14" height="14"></i>
             Tarde: 15:00 &ndash; 19:00 hs
           </p>
         </div>
       </div>
 
-      <div class="step animate-fade-up">
-        <div class="step-number" aria-hidden="true">03</div>
+      <div class="step" data-aos="fade-up" data-aos-delay="300">
+        <span class="step-bg-number" aria-hidden="true">03</span>
         <div class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-          </svg>
+          <i data-lucide="map-pin" width="28" height="28"></i>
         </div>
         <h3 class="step-title">Te esperamos en la clínica</h3>
         <p class="step-desc">Vení a nuestra clínica en Vista Flores. El Od. Esper y su equipo te atienden con tiempo y dedicación.</p>
@@ -571,19 +644,17 @@
 ==================================================== -->
 <section class="section section--light" id="preguntas" aria-labelledby="faq-title">
   <div class="container">
-    <div class="section-header animate-fade-up">
+    <div class="section-header" data-aos="fade-up">
       <p class="section-eyebrow">Dudas habituales</p>
       <h2 id="faq-title" class="section-title">Preguntas frecuentes</h2>
       <p class="section-desc">Información clara y transparente para tomar decisiones con seguridad sobre tu salud bucodental.</p>
     </div>
 
-    <div class="faq-container animate-fade-up">
+    <div class="faq-container" data-aos="fade-up" data-aos-delay="100">
       <details class="faq-item" name="faq-accordion" open>
         <summary class="faq-summary">
           <span class="faq-question">¿Quién es candidato a prótesis sobre implantes y carga inmediata?</span>
-          <svg class="faq-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
+          <i data-lucide="chevron-down" class="faq-chevron" aria-hidden="true" width="20" height="20"></i>
         </summary>
         <div class="faq-content">
           <p>La carga inmediata está indicada en pacientes con adecuada cantidad y densidad ósea y buen estado de salud bucal y general. Cada caso requiere una evaluación diagnóstica minuciosa con estudios clínicos y tomográficos previos para determinar si es viable o si conviene un protocolo convencional en dos etapas.</p>
@@ -593,9 +664,7 @@
       <details class="faq-item" name="faq-accordion">
         <summary class="faq-summary">
           <span class="faq-question">¿En qué consiste la primera consulta de diagnóstico?</span>
-          <svg class="faq-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
+          <i data-lucide="chevron-down" class="faq-chevron" aria-hidden="true" width="20" height="20"></i>
         </summary>
         <div class="faq-content">
           <p>Es el punto de partida esencial. El odontólogo examina integralmente la boca, las encías y las piezas presentes, analiza los estudios radiográficos y conversa sobre tus expectativas y dudas. Con estos datos se planifican las opciones de tratamiento más convenientes para tu caso.</p>
@@ -605,9 +674,7 @@
       <details class="faq-item" name="faq-accordion">
         <summary class="faq-summary">
           <span class="faq-question">¿El procedimiento de colocación de implantes es doloroso?</span>
-          <svg class="faq-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
+          <i data-lucide="chevron-down" class="faq-chevron" aria-hidden="true" width="20" height="20"></i>
         </summary>
         <div class="faq-content">
           <p>El procedimiento se realiza bajo anestesia local. En el postoperatorio se indican analgésicos y cuidados específicos, y la recuperación varía según cada caso.</p>
@@ -617,9 +684,7 @@
       <details class="faq-item" name="faq-accordion">
         <summary class="faq-summary">
           <span class="faq-question">¿Cuánto tiempo dura el tratamiento?</span>
-          <svg class="faq-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
+          <i data-lucide="chevron-down" class="faq-chevron" aria-hidden="true" width="20" height="20"></i>
         </summary>
         <div class="faq-content">
           <p>Depende de la complejidad de cada situación. En casos seleccionados de carga inmediata es posible fijar dientes funcionales el mismo día. En otros casos se respeta un tiempo de osteointegración de unos meses para garantizar la máxima durabilidad y estabilidad ósea del implante.</p>
@@ -629,9 +694,7 @@
       <details class="faq-item" name="faq-accordion">
         <summary class="faq-summary">
           <span class="faq-question">¿Cómo solicito un turno de atención?</span>
-          <svg class="faq-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
+          <i data-lucide="chevron-down" class="faq-chevron" aria-hidden="true" width="20" height="20"></i>
         </summary>
         <div class="faq-content">
           <p>Atendemos con turno coordinado previamente para dedicarle a cada paciente el tiempo necesario. Podés escribirnos directamente a nuestro WhatsApp (+54 9 2622 50-3823) para coordinar el día y horario que mejor te quede.</p>
@@ -648,16 +711,17 @@
   <div class="container">
     <div class="professional-wrapper">
 
-      <!-- Fotos -->
-      <div class="professional-photos animate-fade-left">
+      <!-- Fotos con marco decorativo -->
+      <div class="professional-photos animate-fade-left" data-aos="fade-left">
+        <div class="professional-photo-frame" aria-hidden="true"></div>
+        <div class="professional-photo-dots" aria-hidden="true"></div>
         <div class="professional-photo-main">
-          <img src="assets/esper-1.jpg" alt="Od. Jorge Esteban Esper en la clínica" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius-2xl); display: block;" />
-          <div class="professional-photo-deco" aria-hidden="true"></div>
+          <img src="assets/esper-1.jpg" alt="Od. Jorge Esteban Esper en la clínica" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius-2xl); display: block; position: relative; z-index: 1;" />
         </div>
       </div>
 
       <!-- Info -->
-      <div class="professional-info animate-fade-right">
+      <div class="professional-info" data-aos="fade-right">
         <p class="section-eyebrow">Responsable clínico</p>
         <h2 id="profesional-title" class="section-title">Od. Jorge Esteban Esper</h2>
         <p class="professional-specialty">Especialidad: Implantes dentales, Rehabilitación oral</p>
@@ -667,36 +731,49 @@
         <p class="professional-bio">
           Con consultorio en Vista Flores (Valle de Uco), prioriza un trato personalizado y cercano donde cada diagnóstico se evalúa con rigurosidad médica, explicando con claridad cada etapa del tratamiento para devolver función masticatoria, confort y estética.
         </p>
+
+        <!-- Píldoras flotantes rediseñadas -->
         <div class="professional-highlights">
-          <div class="pro-highlight-item">
+
+          <div class="pro-highlight-card">
             <div class="pro-highlight-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <i data-lucide="shield-check" width="20" height="20"></i>
             </div>
             <div>
               <strong>Diagnóstico individual</strong>
               <span>Evaluación personalizada en cada caso</span>
             </div>
           </div>
-          <div class="pro-highlight-item">
+
+          <div class="pro-highlight-card">
             <div class="pro-highlight-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+              <i data-lucide="map-pin" width="20" height="20"></i>
             </div>
             <div>
               <strong>Valle de Uco</strong>
               <span>San Martín 196, Vista Flores, Mendoza</span>
             </div>
           </div>
-          <div class="pro-highlight-item">
+
+          <div class="pro-highlight-card">
             <div class="pro-highlight-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <i data-lucide="calendar-check" width="20" height="20"></i>
             </div>
             <div>
               <strong>Turnos programados</strong>
-              <span>Atención coordinada con dedicación exclusiva</span>
+              <span>Atención con tiempo y dedicación</span>
             </div>
           </div>
+
         </div>
 
+        <a href="https://wa.me/5492622503823?text=Hola%2C%20quiero%20agendar%20una%20consulta"
+           class="btn btn-primary btn-lg"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Consultar turno con el Dr. Esper por WhatsApp">
+          <i data-lucide="message-circle" aria-hidden="true" width="20" height="20"></i>
+          Consultar turno
+        </a>
       </div>
 
     </div>
@@ -704,99 +781,76 @@
 </section>
 
 <!-- ====================================================
-     CONTACTO Y UBICACIÓN
+     CONTACTO
 ==================================================== -->
 <section class="section section--dark" id="contacto" aria-labelledby="contacto-title">
   <div class="container">
-    <div class="section-header animate-fade-up">
-      <p class="section-eyebrow section-eyebrow--light">Encontranos</p>
-      <h2 id="contacto-title" class="section-title section-title--light">Contacto y ubicación</h2>
+    <div class="section-header" data-aos="fade-up">
+      <p class="section-eyebrow section-eyebrow--light">Contacto directo</p>
+      <h2 id="contacto-title" class="section-title section-title--light">Estamos para ayudarte</h2>
+      <p class="section-desc section-desc--light">Escribinos por WhatsApp o encontranos en nuestra clínica de Vista Flores, Valle de Uco.</p>
     </div>
 
     <div class="contact-wrapper">
-
-      <!-- Info -->
-      <div class="contact-info animate-fade-left">
+      <div class="contact-info" data-aos="fade-left">
 
         <div class="contact-item">
-          <div class="contact-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-            </svg>
+          <div class="contact-icon">
+            <i data-lucide="phone" aria-hidden="true" width="22" height="22"></i>
           </div>
           <div>
-            <h3 class="contact-label">Dirección</h3>
-            <address class="contact-value">San Martín 196, Vista Flores<br />Mendoza, Argentina (CP 5565)</address>
-            <a href="https://maps.google.com/?q=San+Martín+196,+Vista+Flores,+Mendoza"
-               class="contact-action-link" target="_blank" rel="noopener noreferrer"
-               aria-label="Ver cómo llegar en Google Maps">
-              Cómo llegar
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="contact-label">Horarios de atención</h3>
-            <p class="contact-value">Lunes a Viernes (con turno coordinado previo)<br />8:30 &ndash; 12:30 hs y 15:00 &ndash; 19:00 hs</p>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413A11.815 11.815 0 0012.05 0z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="contact-label">WhatsApp</h3>
+            <p class="contact-label">WhatsApp</p>
             <p class="contact-value">+54 9 2622 50-3823</p>
             <a href="https://wa.me/5492622503823?text=Hola%2C%20quiero%20agendar%20una%20consulta"
                class="contact-action-link" target="_blank" rel="noopener noreferrer"
-               aria-label="Escribir por WhatsApp">
-              Escribinos
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+               aria-label="Abrir WhatsApp con Esper Odontología">
+              Escribir ahora
+              <i data-lucide="arrow-right" aria-hidden="true" width="14" height="14"></i>
             </a>
           </div>
         </div>
 
         <div class="contact-item">
-          <div class="contact-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-            </svg>
+          <div class="contact-icon">
+            <i data-lucide="instagram" aria-hidden="true" width="22" height="22"></i>
           </div>
           <div>
-            <h3 class="contact-label">Instagram</h3>
-            <a href="https://www.instagram.com/esperodontologiamendoza"
-               class="contact-value contact-ig-link"
-               target="_blank" rel="noopener noreferrer"
-               aria-label="Instagram de Esper Odontología Mendoza">
-              @esperodontologiamendoza
-            </a>
+            <p class="contact-label">Instagram</p>
+            <p class="contact-value">
+              <a href="https://www.instagram.com/esperodontologiamendoza"
+                 class="contact-ig-link" target="_blank" rel="noopener noreferrer"
+                 aria-label="Instagram de Esper Odontología">
+                @esperodontologiamendoza
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i data-lucide="map-pin" aria-hidden="true" width="22" height="22"></i>
+          </div>
+          <div>
+            <p class="contact-label">Dirección</p>
+            <address class="contact-value">San Martín 196, Vista Flores<br>Mendoza, Argentina (CP 5565)</address>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i data-lucide="clock" aria-hidden="true" width="22" height="22"></i>
+          </div>
+          <div>
+            <p class="contact-label">Horarios (con turno)</p>
+            <p class="contact-value">Lun – Vie: 8:30–12:30 y 15:00–19:00 hs</p>
           </div>
         </div>
 
         <div class="contact-actions">
-          <a href="https://maps.google.com/?q=San+Martín+196,+Vista+Flores,+Mendoza"
-             class="btn btn-outline-light" target="_blank" rel="noopener noreferrer"
-             aria-label="Cómo llegar a Esper Odontología en Google Maps">
-            <svg class="btn-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-            </svg>
-            Cómo llegar
-          </a>
           <a href="https://wa.me/5492622503823?text=Hola%2C%20quiero%20agendar%20una%20consulta"
-             class="btn btn-accent" target="_blank" rel="noopener noreferrer"
-             aria-label="Escribir por WhatsApp">
+             class="btn btn-accent btn-lg"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Agendar turno por WhatsApp">
             <svg class="btn-icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
             </svg>
@@ -807,7 +861,7 @@
       </div><!-- /.contact-info -->
 
       <!-- Mapa embebido con ubicación real -->
-      <div class="contact-map animate-fade-right">
+      <div class="contact-map" data-aos="fade-right">
         <iframe
           title="Ubicación de Esper Odontología – San Martín 196, Vista Flores, Mendoza"
           src="https://maps.google.com/maps?q=San+Mart%C3%ADn+196,+Vista+Flores,+Mendoza,+Argentina&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -913,12 +967,19 @@
    rel="noopener noreferrer"
    aria-label="Contactar por WhatsApp con Esper Odontología"
    title="Escribinos por WhatsApp">
+  <span class="whatsapp-pulse-ring" aria-hidden="true"></span>
   <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28" aria-hidden="true">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
   </svg>
-  <span class="whatsapp-tooltip">¡Agendá tu cita!</span>
+  <span class="whatsapp-tooltip">¿Consultas? Escribinos</span>
 </a>
 
+<!-- ====================================================
+     SCRIPTS
+==================================================== -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
 <script src="js/main.js" defer></script>
 </body>
 </html>

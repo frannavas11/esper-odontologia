@@ -1,8 +1,8 @@
 /**
  * Esper Odontología Mendoza — main.js
- * Funcionalidades: menú hamburguesa, header scroll, slider
- * de galería, animaciones on-scroll y copyright year.
- * Sin dependencias externas.
+ * Funcionalidades: menú hamburguesa, header scroll, animaciones,
+ * AOS init, Lucide icons, galería y copyright.
+ * Sin dependencias externas (AOS y Lucide vía CDN en HTML).
  */
 
 'use strict';
@@ -11,8 +11,8 @@
    1. MENÚ HAMBURGUESA Y OVERLAY (MOBILE)
    ============================================================ */
 (function initHamburger() {
-  const btn = document.getElementById('hamburger-btn');
-  const nav = document.getElementById('main-nav');
+  const btn      = document.getElementById('hamburger-btn');
+  const nav      = document.getElementById('main-nav');
   const backdrop = document.getElementById('nav-backdrop');
   if (!btn || !nav) return;
 
@@ -34,37 +34,22 @@
 
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
-    const isOpen = btn.getAttribute('aria-expanded') === 'true';
-    if (isOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
+    btn.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
   });
 
-  // Cerrar al tocar el backdrop / overlay exterior
   if (backdrop) {
     backdrop.addEventListener('click', closeMenu);
     backdrop.addEventListener('touchstart', closeMenu, { passive: true });
   }
 
-  // Cerrar al clickear cualquier enlace o botón del menú
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      closeMenu();
-    });
-  });
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 
-  // Cerrar al hacer clic en cualquier parte fuera del menú y del botón
   document.addEventListener('click', (e) => {
-    if (nav.classList.contains('is-open')) {
-      if (!nav.contains(e.target) && !btn.contains(e.target)) {
-        closeMenu();
-      }
+    if (nav.classList.contains('is-open') && !nav.contains(e.target) && !btn.contains(e.target)) {
+      closeMenu();
     }
   });
 
-  // Cerrar con tecla Escape
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && nav.classList.contains('is-open')) {
       closeMenu();
@@ -72,11 +57,8 @@
     }
   });
 
-  // Cerrar automáticamente si la pantalla pasa a desktop
   window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768 && nav.classList.contains('is-open')) {
-      closeMenu();
-    }
+    if (window.innerWidth >= 768 && nav.classList.contains('is-open')) closeMenu();
   }, { passive: true });
 })();
 
@@ -86,85 +68,41 @@
 (function initHeaderScroll() {
   const header = document.getElementById('site-header');
   if (!header) return;
-
-  const onScroll = () => {
-    header.classList.toggle('scrolled', window.scrollY > 20);
-  };
-
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // Ejecutar al cargar por si ya está scrolleado
+  onScroll();
 })();
 
 /* ============================================================
-   3. SLIDER DE GALERÍA ANTES/DESPUÉS
+   3. LUCIDE ICONS — inicialización
    ============================================================ */
-(function initGallerySlider() {
-  const track  = document.getElementById('gallery-track');
-  const prevBtn = document.getElementById('gallery-prev');
-  const nextBtn = document.getElementById('gallery-next');
-  const dotsContainer = document.getElementById('gallery-dots');
-  if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
-
-  const slides = Array.from(track.querySelectorAll('.gallery-slide'));
-  const dots   = Array.from(dotsContainer.querySelectorAll('.gallery-dot'));
-  let current  = 0;
-
-  /** Muestra el slide índice i */
-  function goTo(index) {
-    // Ocultar slide actual
-    slides[current].hidden = true;
-    dots[current].classList.remove('gallery-dot--active');
-    dots[current].setAttribute('aria-selected', 'false');
-
-    // Mostrar nuevo slide
-    current = (index + slides.length) % slides.length;
-    slides[current].hidden = false;
-    slides[current].removeAttribute('hidden');
-    dots[current].classList.add('gallery-dot--active');
-    dots[current].setAttribute('aria-selected', 'true');
+(function initLucide() {
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
   }
-
-  prevBtn.addEventListener('click', () => goTo(current - 1));
-  nextBtn.addEventListener('click', () => goTo(current + 1));
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => goTo(i));
-  });
-
-  // Soporte teclado en dots
-  dotsContainer.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
-  });
-
-  // Auto-avance cada 6s (se detiene con interacción)
-  let autoTimer = setInterval(() => goTo(current + 1), 6000);
-
-  const pauseAuto = () => { clearInterval(autoTimer); };
-  prevBtn.addEventListener('click', pauseAuto);
-  nextBtn.addEventListener('click', pauseAuto);
-  dots.forEach(d => d.addEventListener('click', pauseAuto));
-
-  // Touch swipe
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].clientX;
-  }, { passive: true });
-
-  track.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-      pauseAuto();
-      goTo(diff > 0 ? current + 1 : current - 1);
-    }
-  }, { passive: true });
 })();
 
 /* ============================================================
-   4. ANIMACIONES ON-SCROLL (IntersectionObserver)
+   4. AOS — Animate On Scroll
+   ============================================================ */
+(function initAOS() {
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      duration: 650,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60,
+      delay: 0,
+    });
+  }
+})();
+
+/* ============================================================
+   5. ANIMACIONES ON-SCROLL (IntersectionObserver – fallback)
+   Para elementos con clases .animate-fade-up / left / right
+   que no usan data-aos
    ============================================================ */
 (function initScrollAnimations() {
-  // Respetar prefers-reduced-motion
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const els = document.querySelectorAll('.animate-fade-up, .animate-fade-left, .animate-fade-right');
@@ -175,17 +113,14 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target); // Animar solo una vez
+          observer.unobserve(entry.target);
         }
       });
     },
-    {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px',
-    }
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
   );
 
-  // Aplicar stagger delay a grupos de cards del mismo contenedor
+  // Stagger delay en grids
   document.querySelectorAll('.services-grid, .steps-grid, .tech-grid').forEach(grid => {
     Array.from(grid.children).forEach((child, i) => {
       child.style.transitionDelay = `${i * 80}ms`;
@@ -196,7 +131,7 @@
 })();
 
 /* ============================================================
-   5. NAVEGACIÓN ACTIVA (highlight link según sección visible)
+   6. NAVEGACIÓN ACTIVA (highlight link según sección visible)
    ============================================================ */
 (function initActiveNav() {
   const navLinks = document.querySelectorAll('.nav-link');
@@ -209,8 +144,7 @@
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute('id');
           navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            link.classList.toggle('nav-link--active', href === `#${id}`);
+            link.classList.toggle('nav-link--active', link.getAttribute('href') === `#${id}`);
           });
         }
       });
@@ -222,7 +156,7 @@
 })();
 
 /* ============================================================
-   6. AÑO DE COPYRIGHT DINÁMICO
+   7. AÑO DE COPYRIGHT DINÁMICO
    ============================================================ */
 (function initCopyright() {
   const el = document.getElementById('copyright-year');
@@ -230,7 +164,7 @@
 })();
 
 /* ============================================================
-   7. SMOOTH SCROLL PARA NAVEGADORES QUE NO SOPORTAN CSS
+   8. SMOOTH SCROLL
    ============================================================ */
 (function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -248,15 +182,13 @@
           const top = target.getBoundingClientRect().top + window.scrollY - headerH;
           window.scrollTo({ top, behavior: 'smooth' });
         }
-      } catch (_) {
-        // Ignorar selectores no válidos
-      }
+      } catch (_) { /* selector inválido */ }
     });
   });
 })();
 
 /* ============================================================
-   8. PREGUNTAS FRECUENTES — COMPORTAMIENTO ACORDEÓN (UNA SOLA ABIERTA)
+   9. FAQ ACORDEÓN (una sola abierta a la vez)
    ============================================================ */
 (function initFaqAccordion() {
   const faqItems = document.querySelectorAll('.faq-item');
@@ -265,12 +197,32 @@
   faqItems.forEach(item => {
     item.addEventListener('toggle', () => {
       if (item.open) {
-        faqItems.forEach(otherItem => {
-          if (otherItem !== item && otherItem.open) {
-            otherItem.open = false;
-          }
+        faqItems.forEach(other => {
+          if (other !== item && other.open) other.open = false;
         });
       }
+    });
+  });
+})();
+
+/* ============================================================
+   10. IMG-COMPARISON-SLIDER — ajuste de accesibilidad
+   El componente ya funciona por sí solo vía CDN.
+   Aquí sólo añadimos un atributo de accesibilidad si falta.
+   ============================================================ */
+(function initComparisonSliders() {
+  document.querySelectorAll('img-comparison-slider').forEach(slider => {
+    if (!slider.hasAttribute('tabindex')) {
+      slider.setAttribute('tabindex', '0');
+    }
+    if (!slider.hasAttribute('aria-label')) {
+      slider.setAttribute('aria-label', 'Comparación antes y después. Usá las flechas del teclado para ajustar.');
+    }
+    // Keyboard support
+    slider.addEventListener('keydown', e => {
+      const val = parseFloat(slider.value) || 50;
+      if (e.key === 'ArrowLeft')  slider.value = Math.max(0,   val - 5);
+      if (e.key === 'ArrowRight') slider.value = Math.min(100, val + 5);
     });
   });
 })();
